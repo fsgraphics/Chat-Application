@@ -1,0 +1,33 @@
+{
+  "name": "chat-application",
+  "version": "1.0.0",
+  "description": "Chat- Application Practise Node.Js, Express.js, MongoDB, Mongoose ",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development nodemon app.js",
+    "prod": "NODE_ENV=production node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fsgraphics/Chat-Application.git"
+  },
+  "author": "Md.Fazle Hasan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fsgraphics/Chat-Application/issues"
+  },
+  "homepage": "https://github.com/fsgraphics/Chat-Application#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {}
+}
