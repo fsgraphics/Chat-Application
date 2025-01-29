@@ -3,7 +3,7 @@ const multer = require("multer");
 const path = require("path");
 const createError = require("http-errors");
 
-function uploader(subfolder_path, allowed_file_type, max_file_size, error_mgs) {
+function uploader(subfolder_path, allowed_file_types, max_file_size, error_mgs) {
   // File upload folder
   // eslint-disable-next-line no-undef
   const UPLOADS_FOLDER = `${__dirname}/../public/uploads/${subfolder_path}/`;
@@ -34,7 +34,7 @@ function uploader(subfolder_path, allowed_file_type, max_file_size, error_mgs) {
       fileSize: max_file_size,
     },
     fileFilter: (req, file, cb) => {
-      if (allowed_file_type.includes(file.mimetype)) {
+      if (allowed_file_types.includes(file.mimetype)) {
         cb(null, true);
       } else {
         cb(createError(error_mgs));

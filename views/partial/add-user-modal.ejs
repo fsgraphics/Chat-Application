@@ -9,8 +9,7 @@
         method="post"
         action="/users"
         enctype="multipart/form-data"
-        id="add-user-form"
-      >
+        id="add-user-form">
         <input type="text" placeholder="enter name" name="name" />
         <p class="error name-error"></p>
 
@@ -37,7 +36,7 @@
   const modal = document.querySelector("#add-user-modal");
   const form = document.querySelector("#add-user-form");
   // success toast
-  const sucessToast = Toastify({
+  const successToast = Toastify({
     text: "User was added successfully! Reloading the list...",
     duration: 1000,
   });
@@ -52,9 +51,9 @@
   form.onsubmit = async function (event) {
     event.preventDefault();
     // clear errors first
-    const errorPhaceholders = document.querySelectorAll("p.error");
-    for (let i = 0; i < errorPhaceholders.length; i++) {
-      errorPhaceholders[i].style.display = "none";
+    const errorPlaceholders = document.querySelectorAll("p.error");
+    for (let i = 0; i < errorPlaceholders.length; i++) {
+      errorPlaceholders[i].style.display = "none";
     }
 
     const inputErrors = document.querySelectorAll("input.error");
@@ -71,10 +70,9 @@
       method: "POST",
       body: formData,
     });
-    // console.log(response)
+
     // get response
     let result = await response.json();
-
 
     // handle error and response
     if (result.errors) {
@@ -82,13 +80,17 @@
       Object.keys(result.errors).forEach((fieldName) => {
         // add error class to all inputs
         form[fieldName].classList.add("error");
-        // set all error plaseholders(p tag) textContent
-        const errorPhaceholder = document.querySelector(`.${fieldName}-error`);
-        errorPhaceholder.style.display = "block";
+
+        // set all error placeholders(p tag) textContent
+        const errorPlaceholder = document.querySelector(`.${fieldName}-error`);
+        errorPlaceholder.textContent = result.errors[fieldName].msg;
+        
+        // make all placeholders visible
+        errorPlaceholder.style.display = "block";
       });
     } else {
-      // sucess
-      sucessToast.showToast();
+      // success
+      successToast.showToast();
       closeModal();
       document.querySelector("p.error").style.display = "none";
       // reload the page after 1 second
