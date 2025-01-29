@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // external imports
 const { check, validationResult } = require("express-validator");
 const createError = require("http");
@@ -48,7 +49,7 @@ const addUserValidators = [
   check("password")
     .isStrongPassword()
     .withMessage(
-      "Password must be at least 8 characters long & should contain at least 1 lowercase, 1 uppercase, 1 number & 1 symbol",
+      "Password must be at least 8 characters long & should contain at least 1 lowercase, 1 uppercase, 1 number & 1 symbol"
     ),
 ];
 
@@ -56,7 +57,22 @@ const addUserValidationHandler = function (req, res, next) {
   const error = validationResult(req);
   const mappedError = error.mapped();
   if (Object.keys(mappedError).length === 0) {
+    next();
   } else {
+    // remove upload files
+    if (req.files.length > 0) {
+      const { filename } = req.files[0];
+      unlink(
+        path.join(__dirname, `/../public/uploads/avators/${filename}`),
+        (err) => {
+          if (err) console.log(err);
+        }
+      );
+    }
+    // response the errors
+    res.status(500).json({
+      errors: mappedErrors,
+    });
   }
 };
 
