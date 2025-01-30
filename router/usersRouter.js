@@ -14,7 +14,7 @@ const {
   addUserValidators,
   addUserValidationHandler,
 } = require("../middlewares/users/userValidation");
-const {checkLogin} = require("../middlewares/common/checkLogin");
+const { checkLogin } = require("../middlewares/common/checkLogin");
 
 // Users page
 router.get("/", decorateHtmlResponse("Users"), checkLogin, getUsers);
@@ -25,7 +25,7 @@ router.post(
   avatarUpload,
   addUserValidators,
   addUserValidationHandler,
-  addUser
+  addUser,
 );
 
 // remove user
