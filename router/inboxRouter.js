@@ -1,14 +1,20 @@
 // external imports
 const express = require("express");
-
-// internal imports
 const router = express.Router();
-const { getInbox } = require("../controller/inboxContoller");
+// internal imports
+
+const { getInbox, searchUser} = require("../controller/inboxContoller");
+
 const decorateHtmlResponse = require("../middlewares/common/decorateHtmlResponse");
-const {checkLogin} = require("../middlewares/common/checkLogin");
+
+const { checkLogin } = require("../middlewares/common/checkLogin");
 
 // Inbox page
-
 router.get("/", decorateHtmlResponse("Inbox"), checkLogin, getInbox);
+
+// search user for conversation
+router.post("/search", checkLogin, searchUser);
+
+
 
 module.exports = router;

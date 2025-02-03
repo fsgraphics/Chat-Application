@@ -30,7 +30,7 @@ const checkLogin = (req, res, next) => {
     if (res.locals.html) {
       res.redirect("/");
     } else {
-      res.status(500).json({
+      res.status(401).json({
         errors: {
           common: {
             msg: "Authentication failure!",
