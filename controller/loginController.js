@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
 // internal imports
 const User = require("../models/people");
-const { cookie } = require("express-validator");
 
 // get login page
 function getLogin(req, res, next) {
@@ -22,7 +21,7 @@ async function login(req, res, next) {
     if (user && user._id) {
       const isValidPassword = await berypt.compare(
         req.body.password,
-        user.password,
+        user.password
       );
       if (isValidPassword) {
         // prepare the user object to generate token
@@ -50,7 +49,7 @@ async function login(req, res, next) {
         // set logged in user local identifier
         res.locals.loggedInUser = userObject;
 
-        res.render("inbox");
+        res.redirect("inbox");
       } else {
         throw createError("Login failed! Please try again.");
       }
@@ -70,6 +69,7 @@ async function login(req, res, next) {
     });
   }
 }
+
 // do logout
 function logout(req, res) {
   res.clearCookie(process.env.COOKIE_NAME);

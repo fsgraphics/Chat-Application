@@ -1,10 +1,12 @@
 /* eslint-disable no-undef */
 // external imports
 const express = require("express");
+const http = require("http");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const moment = require("moment");
 
 // internal imports
 const {
@@ -17,7 +19,18 @@ const usersRouter = require("./router/usersRouter");
 const inboxRouter = require("./router/inboxRouter");
 
 const app = express();
+const ioServer = http.createServer(app);
 dotenv.config();
+
+// socket creation
+const {Server} = require("socket.io");
+const io = new Server(ioServer)
+global.io = io;
+
+// set comment as app locals
+app.locals.moment = moment;
+
+
 
 // database connection
 mongoose

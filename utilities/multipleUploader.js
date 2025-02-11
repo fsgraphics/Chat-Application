@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // external imports
 const multer = require("multer");
 const path = require("path");

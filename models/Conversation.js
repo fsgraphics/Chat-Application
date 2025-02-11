@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const conversationSchema = new mongoose.Schema(
+const conversationSchema = mongoose.Schema(
   {
     creator: {
       id: mongoose.Types.ObjectId,
